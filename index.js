@@ -58,7 +58,7 @@ var legend = L.control({
 	position: 'bottomright'
 });
 
-ssv('https://rawgit.com/ptv-logistics/xserverjs/master/premium-samples/poi-locator/data/inobas-slim.csv',
+ssv('https://rawgit.com/oliverheilig/leaflet-marker-booster/master/data/inobas-slim.csv',
 	function (rows) {
 		initialize(rows);
 	});
