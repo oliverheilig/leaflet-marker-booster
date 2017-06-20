@@ -42,18 +42,20 @@
 		scale = Math.pow(scale, options.boostExp) * options.boostScale;
 		r = r * scale;
 
-		if(options.boostType === 'ball')
-			p.y = p.y - r;
+		// if(options.boostType === 'ball')
+		// 	p.y = p.y - r;
 
 		switch (options.boostType) {
 			case 'ball':
 				if (options.fill) {
+					if(options.stroke && options.weight !== 0)
+						r = r + options.weight * 0.5 * scale;
 					var grd = ctx.createRadialGradient(p.x - r/2, p.y - r/2, 0, p.x, p.y, 1.25 * r);
 					grd.addColorStop(0, options.fillColor);
 					grd.addColorStop(1, options.color);
 					ctx.beginPath();
 					ctx.fillStyle = grd;
-					ctx.arc(p.x, p.y / s, r, 0, Math.PI * 2, false);
+					ctx.arc(p.x, p.y / s,  r, 0, Math.PI * 2, false);
 					ctx.fill(options.fillRule || 'evenodd');
 				}
 				break;
@@ -91,10 +93,12 @@
 		scale = Math.pow(scale, options.boostExp) * options.boostScale;
 		r = r * scale;
 
-		if(options.boostType === 'ball')
-			p.y = p.y - r;
+		// if(options.boostType === 'ball')
+		// 	p.y = p.y - r/2;
 
-		return p.distanceTo(pp) <= r + L.Browser.touch ? 10 : 0;
+		return p.distanceTo(pp) <= r 
+			+ (this.options.stroke ? this.options.weight * scale / 2 : 0) 
+			+ (L.Browser.touch ? 10 : 0);
 	};
 
 	var cproto = L.Layer.prototype;
@@ -139,16 +143,18 @@
 		var zoomScale;
 		var scale = Math.pow(2, this._map.getZoom()) * 256 / Math.PI / 6378137;
 		scale = Math.pow(scale, options.boostExp) * options.boostScale;
-		switch(options.boostType) {
-		case 'ball':
-			r = 1.5 * r * scale;
-			break;
-		case 'circle':
-			r = 0.75 * r * scale;
-			break;
-		default:
-			break;
-		}
+		// switch(options.boostType) {
+		// case 'ball':
+		// 	r = 1.5 * r * scale;
+		// 	break;
+		// case 'circle':
+		// 	r = 0.75 * r * scale;
+		// 	break;
+		// default:
+		// 	break;
+		// }
+		r = 0.5 * r * scale;
+
 
 		// Where should we anchor the popup on the source layer?
 		return L.point(this._source && this._source._getPopupAnchor ? this._source._getPopupAnchor() : [0, -r]);
