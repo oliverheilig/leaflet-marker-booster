@@ -78,27 +78,25 @@
 	var xproto = L.CircleMarker.prototype;
 	var xprev = xproto._containsPoint;
 
-	xproto._containsPoint = function (pp) {
-		if (!this.options.boostType) {
-			return xprev.call(this, pp);
+	xproto._containsPoint = function (p) {
+		var r = this._radius;
+		
+		if (this.options.boostType) {
+
+			var options = this.options;
+		
+			var scale = Math.pow(2, this._map.getZoom()) * 256 / Math.PI / 6378137;
+			scale = Math.pow(scale, options.boostExp) * options.boostScale;
+			r = r * scale;
+
+			// if(options.boostType === 'ball')
+			// 	p.y = p.y - r/2;
 		}
 
-		var p = L.point(this._point.x, this._point.y),
-			r = this._radius,
-			s = (this._radiusY || r) / r;
-
-		var options = this.options;
-
-		var scale = Math.pow(2, this._map.getZoom()) * 256 / Math.PI / 6378137;
-		scale = Math.pow(scale, options.boostExp) * options.boostScale;
-		r = r * scale;
-
-		// if(options.boostType === 'ball')
-		// 	p.y = p.y - r/2;
-
-		return p.distanceTo(pp) <= r 
+		// clickTolerance olny for mobile!
+		return p.distanceTo(p) <= r 
 			+ (this.options.stroke ? this.options.weight * scale / 2 : 0) 
-			+ (L.Browser.touch ? 10 : 0);
+			+ (L.Browser.touch || L.Browser.mobile ? 10 : 0);
 	};
 
 	var cproto = L.Layer.prototype;
