@@ -82,21 +82,19 @@
 		var r = this._radius;
 		
 		if (this.options.boostType) {
-
 			var options = this.options;
 		
 			var scale = Math.pow(2, this._map.getZoom()) * 256 / Math.PI / 6378137;
 			scale = Math.pow(scale, options.boostExp) * options.boostScale;
 			r = r * scale;
+			r = r + (this.options.stroke ? this.options.weight * scale / 2 : 0);
 
 			// if(options.boostType === 'ball')
 			// 	p.y = p.y - r/2;
 		}
 
 		// clickTolerance olny for mobile!
-		return p.distanceTo(p) <= r 
-			+ (this.options.stroke ? this.options.weight * scale / 2 : 0) 
-			+ (L.Browser.touch || L.Browser.mobile ? 10 : 0);
+		return p.distanceTo(this._point) <= r + ((L.Browser.touch && L.Browser.mobile) ? 10 : 0);
 	};
 
 	var cproto = L.Layer.prototype;
