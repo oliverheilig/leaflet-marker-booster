@@ -175,6 +175,9 @@ function setBoostType(method) {
 		case 2:
 			boostType = 'ball';
 			break;
+		case 3:
+			boostType = 'balloon';
+			break;
 		default:
 			boostType = undefined;
 	}
@@ -192,9 +195,13 @@ function setScaleMode(method) {
 			boostScale = 1.5;
 			boostExp = 0.125;
 			break;
-		default:
+		case 2:
 			boostScale = 3;
 			boostExp = 0.25;
+			break;
+		default:
+			boostScale = 6;
+			boostExp = 0.325;
 	}
 
 	resetPoiLayer();
