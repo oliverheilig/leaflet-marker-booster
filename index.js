@@ -121,7 +121,7 @@ function initialize(rows) {
 
 	if (filter) {
 		poiData.features = poiData.features.filter(function (d) {
-			if (d.properties.category === filter) return d;
+			return d.properties.category === filter;
 		});
 	}
 
