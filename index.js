@@ -1,20 +1,20 @@
 'use strict';
 var colors = {
-	'DIY': '#8dd3c7',
-	'RET': '#ffffb3',
-	'DRG': '#bebada',
-	'FRN': '#fb8072',
-	'FIN': '#80b1d3',
-	'COM': '#fdb462',
-	'EAT': '#b3de69',
-	'PHA': '#fccde5',
-	'KFZ': '#d9d9d9',
-	'CLO': '#bc80bd',
-	'FOD': '#ccebc5',
-	'LEH': '#ccebc5',
-	'TVL': '#fb8072',
-	'LSR': '#ffffb3',
-	'GAS': '#d9d9d9'
+	'DIY': '#114477',
+	'RET': '#4477AA',
+	'DRG': '#77AADD',
+	'FRN': '#117755',
+	'FIN': '#44AA88',
+	'COM': '#99CCBB',
+	'EAT': '#777711',
+	'PHA': '#AAAA44',
+	'KFZ': '#DDDD77',
+	'CLO': '#771111',
+	'FOD': '#AA4444',
+	'LEH': '#DD7777',
+	'TVL': '#771144',
+	'LSR': '#AA4477',
+	'GAS': '#DD77AA'
 };
 
 var poiLayer;
@@ -30,11 +30,12 @@ var mapLocation = new L.LatLng(51.5, 10);
 
 // create a map in the "map" div, set the view to a given place and zoom
 var map = new L.Map('map', {
-	preferCanvas: true // marker booster need the canvas
+	preferCanvas: true // marker booster needs the canvas
 }).setView(mapLocation, 6);
 
 // insert xMap back- and forground layers with sandbox-style
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	maxNativeZoom: 18,
 	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
@@ -64,15 +65,23 @@ ssv('https://rawgit.com/oliverheilig/leaflet-marker-booster/master/data/inobas-s
 	});
 
 legend.onAdd = function (map) {
-	var div = L.DomUtil.create('div', 'info legend');
-	div.innerHTML = '';
+	var div = L.DomUtil.create('div', 'info lll');
 
+	var str = '';
+	var i =0;
+	str +='<div class="pure-g">';
 	for (var key in colors) {
 		if (colors.hasOwnProperty(key)) {
-			div.innerHTML +=
-				'<i style="background:' + colors[key] + '"></i> ' + key + '<br>';
+			str  +=
+				'<div class="pure-u-1-3"><i style="background:' + colors[key] + '"></i> ' + key + '</div>';
+			if((i+1) %3 === 0 && i > 0 && i < Object.keys(colors).length-1)
+				str +='</div><div class="pure-g">';
+			i++;
 		}
 	}
+	str +='</div>';
+
+	div.innerHTML = str;
 
 	return div;
 };
@@ -150,7 +159,7 @@ function poiStyle(feature, latlng) {
 			fillColor: colors[feature.properties.category],
 			fillOpacity: 1,
 			stroke: true,
-			color: '#000',
+			color: '#111',
 			weight: 1,
 			boostType: boostType,
 			boostScale: boostScale,

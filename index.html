@@ -44,27 +44,34 @@
             border-radius: 5px;
         }
 
-        .legend {
+        .lll {
+            width: 180px;
+            overflow-y: auto;
+            display: inline-block;
+            color: rgb(75, 74, 77);
+            text-decoration: none;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.65);
+            border-radius: 5px;
             text-align: left;
             line-height: 19px;
-            color: #555;
         }
 
-        .legend i {
+        .lll i {
             width: 18px;
             height: 18px;
             float: left;
-            margin-right: 8px;
+            margin-right: 3px;
             opacity: 1;
+            border-style: solid;
         }
     </style>
 </head>
 
 <body>
-    <div id="panel-control" class="controlPanel" style="width:292px">
+    <div id="panel-control" class="controlPanel" style="width:240px">
         <form class="pure-form">
             <fieldset id="myFieldSet">
-                <legend>Set marker boost options</legend>
+                <b>Set marker boost options</b>
                 <div style="padding-top:6px">boost mode</div>
                 <div class="pure-g">
                     <div class="pure-u-1-4"><input type="radio" name="boostType" onclick="setBoostType(0);">none</div>
