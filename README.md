@@ -30,11 +30,13 @@ shifted away. With leaflet-marker-cluster the popup gets snapped at the upper th
 Note this feature is also available if no boostType is set.
 
 ## Two new marker tyes
-ball...
-balloon...
+leaflet-marker-booster has a new option ```boostType```. This can be ```circle```, ```ball``` or ```balloon```.
 
 ## Logarithmic map scaling
-It's often useful to scale the markers when zooming in...
+It's often useful to scale the markers when zooming in. The options ```boostScale``` and ```boostExp``` can be used to control an adaptive scaling.
 
 ## fixes for desktop
-clickTolerance...
+The clickTolerance for the Leaflet Canvas Markers has some flaw for desktop browsers. leaflet-marker-booster fixes this.
+
+## How to use
+Just load ```leaflet-marker-booster.js``` to your project, and set ```preferCanvas: true```. Look at the sample for more details.
