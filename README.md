@@ -10,7 +10,7 @@ https://ptv-logistics.github.io/xserverjs/#poi-locator
 ## Purpose
 The Leaflet rendering performance of client-side symbols doesn't scale well for a larger set of locations.
 There are some plugins which help to avoid this problem by clustering https://github.com/Leaflet/Leaflet.markercluster,
-but there are scenarios where rendering all locations at ther actual positions generates a better visualization an usability. 
+but there are scenarios where rendering all locations at ther actual positions generates a better visualization and usability. 
 leaflet-marker-booster is a snap-in extension for Leaflet, which modifies the standard L.CircleMarker.
 
 ## Rendering Boost
@@ -36,7 +36,7 @@ leaflet-marker-booster has a new option ```boostType```. This can be ```circle``
 It's often useful to scale the markers when zooming in. The options ```boostScale``` and ```boostExp``` can be used to control an adaptive scaling.
 
 ## fixes for desktop
-The clickTolerance for the Leaflet Canvas Markers has some flaw for desktop browsers. leaflet-marker-booster fixes this.
+The clickTolerance for the Leaflet Canvas Markers has some flaws for desktop browsers. leaflet-marker-booster fixes this.
 
 ## How to use
 Just load ```leaflet-marker-booster.js``` to your project, and set ```preferCanvas: true```. Look at the sample for more details.
