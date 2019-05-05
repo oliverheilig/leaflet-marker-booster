@@ -14,18 +14,13 @@
 			return;
 		}
 
-		var p = {
-				x: layer._point.x,
-				y: layer._point.y
-			},
-			ctx = this._ctx,
-			r = layer._radius;
-
-		this._drawnLayers[layer._leaflet_id] = layer;
-
+		var p = layer._point,
+		    ctx = this._ctx,
+		    r = Math.max(Math.round(layer._radius), 1),
+		    s = (Math.max(Math.round(layer._radiusY), 1) || r) / r;
+		
 		var options = layer.options;
 
-		var zoomScale;
 		var scale = Math.pow(2, this._map.getZoom()) * 256 / Math.PI / 6378137;
 		scale = Math.pow(scale, options.boostExp) * options.boostScale;
 		r = r * scale;
@@ -103,8 +98,9 @@
 		if(options.boostType === 'balloon')
 			p = new L.Point(p.x, p.y + 2 * r);
 
-		// clickTolerance olny for mobile!
-		return p.distanceTo(this._point) <= r + ((L.Browser.touch && L.Browser.mobile) ? 10 : 0);
+		return p.distanceTo(this._point) <= r + this._clickTolerance();		
+		// clickTolerance only for mobile! (seems to be fixed with LL1.4)
+		// return p.distanceTo(this._point) <= r + ((L.Browser.touch && L.Browser.mobile) ? 10 : 0);
 	};
 
 	var cproto = L.Layer.prototype;
@@ -157,23 +153,5 @@
 
 		// Where should we anchor the popup on the source layer?
 		return L.point(this._source && this._source._getPopupAnchor ? this._source._getPopupAnchor() : [0, -r]);
-	};
-
-	var p_onAdd = pproto.onAdd;
-	pproto.onAdd = function (map) {
-		p_onAdd.call(this, map);
-
-		// stop propagation for booster layer
-		if (this._source && this._source instanceof L.CircleMarker && !(this._source instanceof L.Circle))
-			this._source.on('preclick', L.DomEvent.stopPropagation);
-	};
-
-	var p_onRemove = pproto.onRemove;
-	pproto.onRemove = function (map) {
-		p_onRemove.call(this, map);
-
-		// stop propagation for booster layer
-		if (this._source && this._source instanceof L.CircleMarker && !(this._source instanceof L.Circle))
-			this._source.off('preclick', L.DomEvent.stopPropagation);
 	};
 })();

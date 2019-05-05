@@ -35,7 +35,7 @@ leaflet-marker-booster has a new option ```boostType```. This can be ```circle``
 ## Logarithmic map scaling
 It's often useful to scale the markers when zooming in. The options ```boostScale``` and ```boostExp``` can be used to control an adaptive scaling.
 
-## fixes for desktop
+## fixes for desktop (for Leaflet < 1.4)
 The clickTolerance for the Leaflet Canvas Markers has some flaws for desktop browsers. leaflet-marker-booster fixes this.
 
 ## How to use
