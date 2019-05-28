@@ -55,13 +55,13 @@ info.onAdd = function (map) {
 
 info.addTo(map);
 
-var circle = L.circle([51.508, -0.11], {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: 500
-}).addTo(map);
-circle.bindPopup("HallO");
+// var circle = L.circle([51.508, -0.11], {
+//     color: 'red',
+//     fillColor: '#f03',
+//     fillOpacity: 0.5,
+//     radius: 50000
+// }).addTo(map);
+// circle.bindPopup("I am a circle!");
 
 var legend = L.control({
 	position: 'bottomright'
