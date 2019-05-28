@@ -84,7 +84,7 @@
 
 	xproto._containsPoint = function (p) {
 		if (this instanceof L.Circle)
-			return prev.call(this, layer);
+			return xprev.call(this, p);
 
 		var r = this._radius;
 		
