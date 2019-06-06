@@ -4,7 +4,7 @@ Boosted performance and usability for the Leaflet CircleMarker
 Demo (10.000 locations):
 https://oliverheilig.github.io/leaflet-marker-booster
 
-As feature here:
+As featured here:
 https://ptv-logistics.github.io/xserverjs/#poi-locator
 
 ## Purpose
