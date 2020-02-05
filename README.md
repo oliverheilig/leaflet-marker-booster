@@ -27,9 +27,9 @@ but requires only one filled circle. The performance is about 100% faster than t
 Another issue of the standard marker is the behavior of the popup when clicking. The popup is displayed at the
 click-coordinate, and not at the center of the marker. And if the map gets zoomed in and out, the popup gets
 shifted away. With leaflet-marker-cluster the popup gets snapped at the upper thirds of the marker and stays there.
-Note this feature is also available if no boostType is set.
+Note this feature is also available when no boostType is set.
 
-## Two new marker tyes
+## Two new marker types
 leaflet-marker-booster has a new option ```boostType```. This can be ```circle```, ```ball``` or ```balloon```.
 
 ## Logarithmic map scaling
