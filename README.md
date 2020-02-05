@@ -10,8 +10,8 @@ https://ptv-logistics.github.io/xserverjs/#poi-locator
 ## Purpose
 The Leaflet rendering performance of client-side symbols doesn't scale well for a larger set of locations.
 There are some plugins which help to avoid this problem by clustering https://github.com/Leaflet/Leaflet.markercluster,
-but there are scenarios where rendering all locations at ther actual positions generates a better visualization and usability. 
-leaflet-marker-booster is a snap-in extension for Leaflet, which modifies the standard L.CircleMarker.
+but there are scenarios where rendering all locations at their actual positions generates a better visualization and usability. 
+leaflet-marker-booster is a snap-in extension for Leaflet which modifies the standard L.CircleMarker.
 
 ## Rendering Boost
 Typically a marker is rendered as cirlce with a filling and a stroke. The stroke is important to differentiate
