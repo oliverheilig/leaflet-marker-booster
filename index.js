@@ -33,10 +33,14 @@ var map = new L.Map('map', {
 	preferCanvas: true // marker booster needs the canvas
 }).setView(mapLocation, 6);
 
-// insert xMap back- and forground layers with sandbox-style
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-	maxNativeZoom: 18,
-	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+// This is my personal api key. Please get your own free key at https://developer.myptv.com/
+var apiKey = 'YjA2OGIzOGMxMjdiNGZkOGIwYTMwNmI0OGE4Y2ZiMTc6Y2QwZjUyMDYtMTk2Ni00N2NlLWFmNTYtNzBjOWZjZTgxNzJh';
+
+L.tileLayer('https://api.myptv.com/rastermaps/v1/image-tiles/{z}/{x}/{y}?style={style}&apiKey={apiKey}', {
+	maxZoom: 22,
+	attribution: '&copy; ' + new Date().getFullYear() + ' PTV Group, HERE',
+	style: 'silica',
+	apiKey: apiKey
 }).addTo(map);
 
 // add scale control
