@@ -111,25 +111,25 @@
 		if (!(layer instanceof L.CircleMarker) || (layer instanceof L.Circle))
 			return cprev.call(this, e);
 
-		if (!this._popup) {
+		if (!this._popup || !this._map) {
 			return;
 		}
-
-		if (!this._map) {
-			return;
-		}
-
 		// prevent map click
 		L.DomEvent.stop(e);
 
-		// treat it like a marker and figure out
-		// if we should toggle it open/closed
-		if (this._map.hasLayer(this._popup) && this._popup._source === layer) {
-			this.closePopup();
-		} else {
-			this.openPopup(layer || e.target, layer._latlng);
-			layer.on('preclick', L.DomEvent.stopPropagation);
+		const target = e.layer || e.target;
+		if (this._popup._source === target) {
+			// treat it like a marker and figure out
+			// if we should toggle it open/closed
+			if (this._map.hasLayer(this._popup)) {
+				this.closePopup();
+			} else {
+				this.openPopup(e.latlng);
+			}
+			return;
 		}
+		this._popup._source = target;
+		this.openPopup(e.latlng);
 	};
 
 	var pproto = L.Popup.prototype;
